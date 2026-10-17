@@ -1,0 +1,10 @@
+.DS_Store
+.qa/
+dist/
+node_modules/
+.wrangler/
+.env
+.env.*
+.dev.vars*
+__pycache__/
+*.pyc

@@ -1,0 +1,1628 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>どこでもデスクとどこでもメッシュ｜仕事場と中庭</title>
+<meta name="description" content="人間とAIの仕事場「どこでもデスク」と、仕事場同士をつなぐ中庭「どこでもメッシュ」。役所の各課を例に、12枚のスライドで紹介します。">
+<meta property="og:title" content="どこでもデスクとどこでもメッシュ">
+<meta property="og:description" content="仕事場と中庭のつながりを、役所の各課を例に12枚のスライドで紹介します。">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<meta name="theme-color" content="#F8F7F3">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F8F7F3;
+    --paper: #FFFFFF;
+    --ink-primary: #152420;
+    --ink-secondary: #485A54;
+    --ink-tertiary: #7D8E88;
+    
+    --desk-base: #E8EEF1;
+    --desk-border: #B6C7CF;
+    --desk-accent: #2B5768;
+
+    --mesh-glow: rgba(184, 214, 173, 0.35);
+    --mesh-bg: #EAF2E5;
+    --mesh-border: #6B8E5F;
+    --mesh-accent: #3E6333;
+
+    --gold-accent: #D9A854;
+    --warn-bg: #FFF8E6;
+    --warn-border: #E6B800;
+    --warn-text: #8C6B00;
+
+    --line: rgba(21, 36, 32, 0.08);
+
+    --font-sans: "Inter", "BIZ UDPGothic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  [data-theme="dark"] {
+    --bg: #111A17;
+    --paper: #182420;
+    --ink-primary: #EEF3F0;
+    --ink-secondary: #ADC0B8;
+    --ink-tertiary: #6E827A;
+
+    --desk-base: #1E2D33;
+    --desk-border: #3A4F57;
+    --desk-accent: #6FA2B6;
+
+    --mesh-glow: rgba(78, 122, 63, 0.25);
+    --mesh-bg: #1B2B1E;
+    --mesh-border: #527A45;
+    --mesh-accent: #97C789;
+
+    --warn-bg: #2B230C;
+    --warn-border: #B38600;
+    --warn-text: #FFD454;
+
+    --line: rgba(238, 243, 240, 0.08);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background-color: #0B1210;
+    color: var(--ink-primary);
+    font-family: var(--font-sans);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(12px, 2vw, 28px);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Presentation Viewport (16:9 Canvas) */
+  .slide-container {
+    width: 100%;
+    max-width: 1360px;
+    aspect-ratio: 16 / 9;
+    background: var(--bg);
+    border-radius: 16px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45), 0 2px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    padding: clamp(24px, 4vw, 50px) clamp(32px, 5vw, 68px);
+    transition: background 0.4s ease, color 0.4s ease;
+  }
+
+  .slide-container::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 50% 45%, transparent 60%, rgba(21, 36, 32, 0.03) 100%);
+    pointer-events: none;
+  }
+
+  /* Slide Pages */
+  .slide-item {
+    display: none;
+    flex: 1;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .slide-item.active {
+    display: flex;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Header */
+  .slide-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: clamp(12px, 1.8vw, 24px);
+  }
+
+  .meta-tag {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--mesh-accent);
+    text-transform: uppercase;
+  }
+
+  .slide-number {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-tertiary);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Headline & Lead */
+  .headline-wrap {
+    margin-bottom: clamp(14px, 2.2vw, 30px);
+  }
+
+  .slide-title {
+    font-size: clamp(26px, 3.2vw, 42px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--ink-primary);
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+
+  .slide-lead {
+    font-size: clamp(15px, 1.55vw, 21px);
+    color: var(--ink-secondary);
+    line-height: 1.45;
+  }
+
+  .slide-lead strong {
+    color: var(--ink-primary);
+    font-weight: 600;
+  }
+
+  /* Main Body Area */
+  .slide-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 0;
+  }
+
+  /* Footer */
+  .slide-footer {
+    margin-top: clamp(14px, 1.8vw, 24px);
+    border-top: 1px solid var(--line);
+    padding-top: clamp(10px, 1.4vw, 18px);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 24px;
+  }
+
+  .footer-core { flex: 1; }
+  .footer-main {
+    font-size: clamp(15px, 1.7vw, 22px);
+    font-weight: 700;
+    color: var(--ink-primary);
+    line-height: 1.35;
+    margin-bottom: 4px;
+  }
+  .footer-sub {
+    font-size: clamp(12px, 1.1vw, 15px);
+    color: var(--mesh-accent);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  /* ========================================================
+     Component Styles Across Slides
+     ======================================================== */
+
+  /* Split 2-Column Stage */
+  .split-stage {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(16px, 2.4vw, 32px);
+    height: 100%;
+    align-items: stretch;
+  }
+
+  .concept-card, .shelf-card, .record-box, .chat-box, .clarity-card {
+    background: var(--paper);
+    border: 1.5px solid var(--desk-border);
+    border-radius: 14px;
+    padding: clamp(16px, 2vw, 26px);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+  }
+
+  .card-badge, .box-badge {
+    align-self: flex-start;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 6px;
+    background: var(--desk-base);
+    color: var(--desk-accent);
+    margin-bottom: 12px;
+  }
+
+  .card-badge.green, .box-badge.green {
+    background: var(--mesh-bg);
+    color: var(--mesh-accent);
+  }
+
+  .card-heading {
+    font-size: clamp(18px, 1.8vw, 24px);
+    font-weight: 700;
+    color: var(--ink-primary);
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+
+  .card-desc {
+    font-size: clamp(13px, 1.25vw, 16px);
+    color: var(--ink-secondary);
+    line-height: 1.55;
+    margin-bottom: auto;
+  }
+
+  .feature-pills {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+
+  .pill {
+    background: var(--bg);
+    border: 1px solid var(--desk-border);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-primary);
+  }
+
+  .shelf-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: auto;
+  }
+
+  .shelf-item {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .shelf-icon { font-size: 22px; }
+  .shelf-title { font-size: 14px; font-weight: 700; color: var(--ink-primary); }
+  .shelf-text { font-size: 12px; color: var(--ink-tertiary); margin-top: 2px; }
+
+  /* Slide 2: 3-Col Stage */
+  .stage-3col {
+    display: grid;
+    grid-template-columns: 1fr 1.35fr 1fr;
+    gap: clamp(16px, 2.2vw, 30px);
+    height: 100%;
+    align-items: stretch;
+  }
+
+  .space-card {
+    background: var(--paper);
+    border: 1.5px solid var(--desk-border);
+    border-radius: 14px;
+    padding: clamp(16px, 1.8vw, 24px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+  }
+
+  .space-badge {
+    align-self: flex-start;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 6px;
+    background: var(--desk-base);
+    color: var(--desk-accent);
+    margin-bottom: 10px;
+  }
+
+  .space-title { font-size: clamp(18px, 1.7vw, 23px); font-weight: 700; color: var(--ink-primary); }
+  .space-sub { font-size: 12px; color: var(--ink-tertiary); margin-bottom: 14px; }
+
+  .chamber-box {
+    background: var(--bg);
+    border-radius: 8px;
+    padding: 10px 12px;
+    border: 1px dashed var(--desk-border);
+  }
+
+  .chamber-line { font-size: 12px; color: var(--ink-secondary); margin-bottom: 6px; font-weight: 500; }
+  .chamber-sub { font-size: 11px; color: var(--ink-tertiary); border-top: 1px solid var(--line); padding-top: 6px; margin-top: 6px; }
+
+  .courtyard-box {
+    background: var(--mesh-bg);
+    border: 2px solid var(--mesh-border);
+    border-radius: 18px;
+    padding: clamp(14px, 1.8vw, 22px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 8px 32px var(--mesh-glow);
+    position: relative;
+  }
+
+  .courtyard-tag {
+    background: var(--paper);
+    color: var(--mesh-accent);
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    border: 1px solid var(--mesh-border);
+  }
+
+  .courtyard-head { font-size: clamp(17px, 1.8vw, 24px); font-weight: 700; color: var(--ink-primary); margin-top: 4px; }
+
+  .flow-pills { display: flex; gap: 8px; width: 100%; }
+  .flow-pill {
+    flex: 1;
+    background: var(--paper);
+    border: 1px solid rgba(82, 122, 69, 0.25);
+    border-radius: 20px;
+    padding: 4px 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--mesh-accent);
+    text-align: center;
+  }
+  .flow-pill.ret { color: var(--desk-accent); border-color: rgba(43, 87, 104, 0.25); }
+
+  .shared-docs {
+    width: 100%;
+    background: var(--paper);
+    border-radius: 10px;
+    padding: 10px;
+    border: 1px solid var(--mesh-border);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
+  }
+
+  .doc-card {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 6px 4px;
+    text-align: center;
+  }
+
+  .doc-ico { font-size: 16px; display: block; margin-bottom: 2px; }
+  .doc-tit { font-size: 11px; font-weight: 700; color: var(--ink-primary); }
+  .doc-txt { font-size: 9px; color: var(--ink-tertiary); margin-top: 1px; }
+
+  .courtyard-foot { font-size: 11px; color: var(--mesh-accent); font-weight: 600; text-align: center; }
+
+  /* Slide 3 & 9: Map Stage */
+  .map-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+    padding: 10px 0;
+  }
+
+  .map-oval {
+    background: var(--mesh-bg);
+    border: 2px solid var(--mesh-border);
+    border-radius: 40px;
+    padding: 10px 36px;
+    text-align: center;
+    box-shadow: 0 4px 16px var(--mesh-glow);
+    z-index: 2;
+  }
+
+  .map-oval.settled {
+    border-style: solid;
+    background: var(--paper);
+  }
+
+  .oval-title { font-size: 18px; font-weight: 700; color: var(--ink-primary); }
+  .oval-sub { font-size: 12px; color: var(--mesh-accent); font-weight: 500; margin-top: 2px; }
+
+  .map-connect {
+    width: 2px;
+    height: 24px;
+    background: var(--desk-border);
+  }
+
+  .map-desks-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    width: 100%;
+    max-width: 980px;
+    z-index: 2;
+  }
+
+  .mini-desk-card {
+    background: var(--paper);
+    border: 1.5px solid var(--desk-border);
+    border-radius: 10px;
+    padding: 14px 10px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    transition: transform 0.2s ease;
+  }
+
+  .mini-desk-card.highlight {
+    border-color: var(--desk-accent);
+    background: var(--desk-base);
+  }
+
+  .mini-desk-card.success {
+    border-color: var(--mesh-accent);
+  }
+
+  .mini-desk-head { font-size: 16px; font-weight: 700; color: var(--ink-primary); margin-bottom: 4px; }
+  .mini-desk-tag { font-size: 12px; color: var(--ink-tertiary); }
+  .mini-desk-tag.active { color: var(--mesh-accent); font-weight: 600; font-size: 11px; }
+
+  /* Slide 4 & 5: Record & Chat */
+  .record-section {
+    margin-bottom: 14px;
+  }
+  .record-label { font-size: 12px; font-weight: 700; color: var(--ink-tertiary); text-transform: uppercase; margin-bottom: 4px; }
+  .record-value { font-size: 15px; color: var(--ink-primary); line-height: 1.45; }
+
+  .chat-bubble {
+    background: var(--bg);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+    border: 1px solid var(--line);
+  }
+
+  .chat-bubble.ai {
+    background: var(--mesh-bg);
+    border-color: var(--mesh-border);
+  }
+
+  .bubble-sender { font-size: 11px; font-weight: 700; color: var(--ink-tertiary); margin-bottom: 4px; }
+  .bubble-text { font-size: 13.5px; color: var(--ink-primary); line-height: 1.5; }
+
+  /* Slide 5: Clarity Cards */
+  .clarity-header { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; }
+  .dot.blue { background: var(--desk-accent); }
+  .dot.green { background: var(--mesh-accent); }
+  .clarity-header h4 { font-size: 17px; font-weight: 700; color: var(--ink-primary); }
+  
+  .clarity-list { list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: var(--ink-secondary); margin-bottom: auto; }
+  .clarity-list li { position: relative; padding-left: 18px; line-height: 1.45; }
+  .clarity-list li::before { content: "•"; position: absolute; left: 0; color: var(--mesh-accent); font-weight: bold; }
+
+  .clarity-tag { margin-top: 16px; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 6px; align-self: flex-start; }
+  .blue-tag { background: var(--desk-base); color: var(--desk-accent); }
+  .green-tag { background: var(--mesh-bg); color: var(--mesh-accent); }
+
+  .mid-action-banner {
+    background: var(--mesh-bg);
+    border: 1.5px solid var(--mesh-border);
+    border-radius: 8px;
+    padding: 10px 16px;
+    margin-top: 16px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--mesh-accent);
+  }
+
+  /* Slide 6: Modern Table & Sheet */
+  .sheet-container {
+    background: var(--paper);
+    border: 1.5px solid var(--mesh-border);
+    border-radius: 12px;
+    padding: clamp(16px, 2.2vw, 24px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+  }
+
+  .sheet-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 10px;
+  }
+
+  .sheet-badge { font-size: 14px; font-weight: 700; color: var(--mesh-accent); }
+  .sheet-id { font-size: 12px; color: var(--ink-tertiary); font-family: monospace; }
+
+  .modern-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+
+  .modern-table th, .modern-table td {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    line-height: 1.45;
+  }
+
+  .modern-table th {
+    background: var(--bg);
+    font-weight: 600;
+    color: var(--ink-secondary);
+  }
+
+  .modern-table td { color: var(--ink-primary); }
+
+  .status-pill {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .status-pill.warn { background: var(--warn-bg); color: var(--warn-text); border: 1px solid var(--warn-border); }
+
+  /* Slide 7: Steps Flow */
+  .steps-flow {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    height: 100%;
+  }
+
+  .step-col {
+    flex: 1;
+    background: var(--paper);
+    border: 1.5px solid var(--desk-border);
+    border-radius: 12px;
+    padding: clamp(16px, 2vw, 24px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.02);
+    height: 100%;
+  }
+
+  .step-col.highlight {
+    border-color: var(--desk-accent);
+    background: var(--desk-base);
+  }
+
+  .step-num { font-size: 28px; font-weight: 700; color: var(--mesh-accent); margin-bottom: 8px; }
+  .step-tit { font-size: 17px; font-weight: 700; color: var(--ink-primary); margin-bottom: 8px; }
+  .step-desc { font-size: 13.5px; color: var(--ink-secondary); line-height: 1.5; margin-bottom: auto; }
+  .step-loc { margin-top: 14px; font-size: 12px; font-weight: 600; color: var(--ink-tertiary); }
+  .step-arrow { font-size: 20px; color: var(--mesh-border); font-weight: bold; }
+
+  /* Slide 8: Roles & Callout */
+  .roles-stage { display: flex; flex-direction: column; gap: 16px; height: 100%; justify-content: center; }
+  .modern-table.roles thead th { background: var(--mesh-bg); color: var(--mesh-accent); font-weight: 700; }
+  .doc-tag { background: var(--desk-base); color: var(--desk-accent); padding: 3px 8px; border-radius: 4px; font-size: 12px; font-weight: 600; }
+
+  .unresolved-callout {
+    background: var(--warn-bg);
+    border: 1.5px solid var(--warn-border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .callout-icon { font-size: 24px; }
+  .callout-title { font-size: 14px; font-weight: 700; color: var(--warn-text); }
+  .callout-desc { font-size: 12.5px; color: var(--ink-primary); margin-top: 2px; }
+
+  /* Slide 11: Synthesis */
+  .synthesis-stage {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 24px;
+    align-items: center;
+    height: 100%;
+  }
+
+  .syn-card {
+    background: var(--paper);
+    border-radius: 14px;
+    padding: clamp(20px, 2.5vw, 32px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .syn-card.desk-syn { border: 2px solid var(--desk-border); }
+  .syn-card.mesh-syn { border: 2px solid var(--mesh-border); background: var(--mesh-bg); }
+
+  .syn-icon { font-size: 32px; margin-bottom: 8px; }
+  .syn-title { font-size: 22px; font-weight: 700; color: var(--ink-primary); margin-bottom: 4px; }
+  .syn-subtitle { font-size: 13px; color: var(--ink-tertiary); margin-bottom: 16px; }
+
+  .syn-points { list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: var(--ink-secondary); }
+  .syn-points li { position: relative; padding-left: 20px; line-height: 1.45; }
+  .syn-points li::before { content: "✔"; position: absolute; left: 0; color: var(--mesh-accent); font-weight: bold; }
+
+  .syn-center-symbol { text-align: center; }
+  .sym-circle {
+    width: 44px; height: 44px; border-radius: 50%; background: var(--paper);
+    border: 1.5px solid var(--mesh-border); display: flex; align-items: center; justify-content: center;
+    font-weight: bold; color: var(--mesh-accent); margin: 0 auto 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  .sym-text { font-size: 12px; font-weight: 700; color: var(--ink-tertiary); }
+
+  /* Slide 12: Reference Grid */
+  .ref-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    height: 100%;
+  }
+
+  .ref-item {
+    background: var(--paper);
+    border: 1.5px solid var(--desk-border);
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  .ref-item.wide { grid-column: span 2; }
+
+  .ref-head { font-size: 11px; font-weight: 700; color: var(--mesh-accent); text-transform: uppercase; margin-bottom: 4px; }
+  .ref-tit { font-size: 16px; font-weight: 700; color: var(--ink-primary); margin-bottom: 4px; }
+  .ref-sub { font-size: 13px; color: var(--ink-secondary); margin-bottom: 8px; line-height: 1.4; }
+  .ref-link { font-size: 12px; color: var(--desk-accent); font-family: monospace; text-decoration: none; word-break: break-all; margin-top: auto; }
+  .ref-link:hover { text-decoration: underline; }
+
+  /* ========================================================
+     Navigation Controls & Dock
+     ======================================================== */
+  .deck-controls {
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1360px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .ctrl-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn {
+    background: #1B2925;
+    color: #EEF3F0;
+    border: 1px solid #364B44;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+  }
+
+  .btn:hover {
+    background: #253932;
+    border-color: #5C8276;
+    color: #FFFFFF;
+  }
+
+  .btn:disabled {
+    opacity: 0.35;
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .btn.primary {
+    background: #3E6333;
+    border-color: #6B8E5F;
+  }
+  .btn.primary:hover { background: #4C7A3E; }
+
+  .progress-wrap {
+    flex: 1;
+    max-width: 240px;
+    height: 6px;
+    background: #1B2925;
+    border-radius: 3px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background: #6B8E5F;
+    width: 8.33%;
+    transition: width 0.3s ease;
+  }
+
+  .slide-counter {
+    font-size: 13px;
+    font-weight: 600;
+    color: #ADC0B8;
+    min-width: 60px;
+    text-align: center;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .hint-text {
+    font-size: 12px;
+    color: #6E827A;
+  }
+
+  /* Responsive Adjustments */
+  @media (max-width: 900px) {
+    .slide-container {
+      aspect-ratio: auto;
+      min-height: auto;
+      padding: 24px;
+    }
+    .split-stage, .stage-3col, .synthesis-stage, .ref-grid {
+      grid-template-columns: 1fr;
+    }
+    .steps-flow { flex-direction: column; }
+    .map-desks-row { grid-template-columns: repeat(2, 1fr); }
+    .ref-item.wide { grid-column: span 1; }
+    .deck-controls { justify-content: center; }
+  }
+
+  /* Delivery fixes: visible progress, readable controls, and full-screen navigation. */
+  .progress-wrap { flex: 0 0 112px; min-width: 112px; }
+  .ctrl-group { flex-wrap: wrap; }
+  .btn { white-space: nowrap; }
+  .btn:focus-visible, a:focus-visible { outline: 3px solid #D9A854; outline-offset: 3px; }
+  .slide-number { white-space: nowrap; }
+  html:fullscreen { overflow-y: auto; background: #0B1210; }
+  @media (max-width: 600px) {
+    .ctrl-group { justify-content: center; width: 100%; }
+    .progress-wrap { flex-basis: 60px; min-width: 60px; }
+    .btn { padding: 10px 12px; }
+    .slide-header { gap: 8px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Presentation Canvas -->
+<div class="slide-container" id="slideCanvas">
+
+  <section class="slide-item active" id="slide-1">
+    <header class="slide-header">
+      <div class="meta-tag">DOKODEMO-DESK / DEFINITION</div>
+      <div class="slide-number">01 / 12</div>
+    </header>
+
+    <div class="headline-wrap">
+      <h2 class="slide-title">どこでもデスクとは？</h2>
+      <p class="slide-lead"><strong>人間とAIが一緒に仕事をするための、PC上の仕事場です。</strong><br>いわば、机や棚があり、仕事の進め方も用意された自分だけの事務所。</p>
+    </div>
+
+    <div class="slide-body">
+      
+        <div class="split-stage">
+          <div class="concept-card">
+            <div class="card-badge">🏢 事務所のメタファー</div>
+            <h3 class="card-heading">仕事の進め方と記録を<br>揃えた専用フォルダ</h3>
+            <p class="card-desc">あなた専用のPCローカル環境に作られた、独立したワークスペース。クラウドの巨大システムに縛られず、自分の手元で仕事を育てます。</p>
+            <div class="feature-pills">
+              <span class="pill">📁 完全ローカル</span>
+              <span class="pill">🤖 AIとペア作業</span>
+              <span class="pill">🔒 独立した領分</span>
+            </div>
+          </div>
+          <div class="shelf-card">
+            <div class="card-badge green">📦 仕事場（フォルダ）に置くもの</div>
+            <div class="shelf-grid">
+              <div class="shelf-item">
+                <span class="shelf-icon">🎯</span>
+                <div>
+                  <div class="shelf-title">目的・ルール・役割</div>
+                  <div class="shelf-text">誰が何のために進めるか、仕事の憲法</div>
+                </div>
+              </div>
+              <div class="shelf-item">
+                <span class="shelf-icon">📝</span>
+                <div>
+                  <div class="shelf-title">資料・作業の途中経過</div>
+                  <div class="shelf-text">下書き、データ、相棒AIとの壁打ちメモ</div>
+                </div>
+              </div>
+              <div class="shelf-item">
+                <span class="shelf-icon">🏆</span>
+                <div>
+                  <div class="shelf-title">判断理由・完成した成果</div>
+                  <div class="shelf-text">なぜそう決めたか、できあがった成果物</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+    </div>
+
+    <footer class="slide-footer">
+      <div class="footer-core">
+        <div class="footer-main">あなたとAIが読み、仕事を進め、続きを書き残します。</div>
+        <div class="footer-sub">誰の目も気にせず、自分のペースで試行錯誤を深められる安全な領域です。</div>
+      </div>
+    </footer>
+  </section>
+
+
+  <section class="slide-item " id="slide-2">
+    <header class="slide-header">
+      <div class="meta-tag">DOKODEMO-MESH / DEFINITION</div>
+      <div class="slide-number">02 / 12</div>
+    </header>
+
+    <div class="headline-wrap">
+      <h2 class="slide-title">どこでもメッシュとは？</h2>
+      <p class="slide-lead"><strong>お互いの部屋には入らない。</strong> 中庭のテーブルに、一枚の紙を置き合う共有の場所です。</p>
+    </div>
+
+    <div class="slide-body">
+      
+        <div class="stage-3col">
+          <div class="space-card">
+            <div class="space-badge">🔒 非公開・自律</div>
+            <h3 class="space-title">自分たちのデスク</h3>
+            <p class="space-sub">自分のペースで考え、深める場所</p>
+            <div class="chamber-box">
+              <div class="chamber-line">👤 職員 ＋ 🤖 専属AI</div>
+              <div class="chamber-line">📝 下書き・試行錯誤・壁打ち</div>
+              <div class="chamber-sub">※ 相手のデスクからは見えない</div>
+            </div>
+          </div>
+
+          <div class="courtyard-box">
+            <div class="courtyard-tag">🌿 共有の中庭（メッシュ）</div>
+            <h3 class="courtyard-head">必要な情報だけを持ち寄る</h3>
+            <div class="flow-pills">
+              <span class="flow-pill">↑ 相談を置く</span>
+              <span class="flow-pill ret">↓ 成果を持ち帰る</span>
+            </div>
+            <div class="shared-docs">
+              <div class="doc-card">
+                <span class="doc-ico">📋</span>
+                <div class="doc-tit">相談票</div>
+                <div class="doc-txt">確かめたいこと</div>
+              </div>
+              <div class="doc-card">
+                <span class="doc-ico">🤝</span>
+                <div class="doc-tit">役割分担</div>
+                <div class="doc-txt">誰が担うか</div>
+              </div>
+              <div class="doc-card">
+                <span class="doc-ico">📦</span>
+                <div class="doc-tit">共同成果</div>
+                <div class="doc-txt">合意文書・様式</div>
+              </div>
+            </div>
+            <div class="courtyard-foot">用事が済めば、中庭は静かに片付いて閉じられる</div>
+          </div>
+
+          <div class="space-card">
+            <div class="space-badge">🔒 相手の領分</div>
+            <h3 class="space-title">相手のデスク</h3>
+            <p class="space-sub">持ち帰り、自分の基準で判断する場所</p>
+            <div class="chamber-box">
+              <div class="chamber-line">👤 相手の担当 ＋ 🤖 相棒AI</div>
+              <div class="chamber-line">🏢 自課の事情・資料・内部検討</div>
+              <div class="chamber-sub">※ こちらから机の中身は覗かない</div>
+            </div>
+          </div>
+        </div>
+        
+    </div>
+
+    <footer class="slide-footer">
+      <div class="footer-core">
+        <div class="footer-main">各デスクの中で考え、中庭へ返す。一緒に作った成果は、それぞれの仕事場で使う。</div>
+        <div class="footer-sub">巨大なシステムに全員が常駐するのではなく、フォルダ同士が適度な距離（境界）を保って協働する。</div>
+      </div>
+    </footer>
+  </section>
+
+
+  <section class="slide-item " id="slide-3">
+    <header class="slide-header">
+      <div class="meta-tag">CASE STUDY / OVERVIEW MAP</div>
+      <div class="slide-number">03 / 12</div>
+    </header>
+
+    <div class="headline-wrap">
+      <h2 class="slide-title">役所の仕事に置き換えると</h2>
+      <p class="slide-lead"><strong>各課にデスク。課同士が協働する場所に、メッシュ（中庭）。</strong><br>鳥羽市の課名を使った仮例で、仕事場と中庭のつながりを見渡します。</p>
+    </div>
+
+    <div class="slide-body">
+      
+        <div class="map-stage">
+          <!-- Top Courtyard -->
+          <div class="map-oval top">
+            <div class="oval-title">🌿 総務と各課の中庭</div>
+            <div class="oval-sub">全庁の共通ルール・提出様式・質問と回答</div>
+          </div>
+          
+          <div class="map-connect top-con"></div>
+
+          <!-- Desk Row -->
+          <div class="map-desks-row">
+            <div class="mini-desk-card">
+              <div class="mini-desk-head">総務課</div>
+              <div class="mini-desk-tag">デスク</div>
+            </div>
+            <div class="mini-desk-card highlight">
+              <div class="mini-desk-head">環境課</div>
+              <div class="mini-desk-tag">デスク</div>
+            </div>
+            <div class="mini-desk-card">
+              <div class="mini-desk-head">建設課</div>
+              <div class="mini-desk-tag">デスク</div>
+            </div>
+            <div class="mini-desk-card">
+              <div class="mini-desk-head">農林水産課</div>
+              <div class="mini-desk-tag">デスク</div>
+            </div>
+          </div>
+
+          <div class="map-connect bottom-con"></div>
+
+          <!-- Bottom Courtyard -->
+          <div class="map-oval bottom">
+            <div class="oval-title">🌿 3課の中庭</div>
+            <div class="oval-sub">課をまたぐ相談・草木資源化の共同作業</div>
+          </div>
+        </div>
+        
+    </div>
+
+    <footer class="slide-footer">
+      <div class="footer-core">
+        <div class="footer-main">四角：各課のデスク（自律の仕事場）　　楕円：課同士のメッシュ（共有の中庭）</div>
+        <div class="footer-sub">これは指揮命令系統の組織図ではありません。必要な時に協働するための「場所の配置図」です。</div>
+      </div>
+    </footer>
+  </section>
+
+
+  <section class="slide-item " id="slide-4">
+    <header class="slide-header">
+      <div class="meta-tag">DEEP DIVE / STEP 1: DESK WORK</div>
+      <div class="slide-number">04 / 12</div>
+    </header>
+
+    <div class="headline-wrap">
+      <h2 class="slide-title">環境課のデスクで、今日の仕事を始める</h2>
+      <p class="slide-lead"><strong>担当者が「清掃で出た草木についての相談」を開きます。</strong><br>前回の記録を読み、自課のデスクの中で今日の確認事項を整理します。</p>
+    </div>
+
+    <div class="slide-body">
+      
+        <div class="split-stage">
+          <div class="record-box">
+            <div class="box-badge">📁 デスクに残っていた記録</div>
+            <div class="record-section">
+              <div class="record-label">相談の目的</div>
+              <div class="record-value">清掃活動で出た草木を、焼却せず資源として活用したい。</div>
+            </div>
+            <div class="record-section">
+              <div class="record-label">前回までの経緯</div>
+              <div class="record-value">回収方法と再利用の条件が、まだ課内で揃っていない。</div>
+            </div>
+            <div class="record-section">
+              <div class="record-label">担当</div>
+              <div class="record-value">環境課 職員A ＆ 専属AI</div>
+            </div>
+          </div>
+
+          <div class="chat-box">
+            <div class="box-badge green">💬 職員がAIに相談する</div>
+            <div class="chat-bubble user">
+              <div class="bubble-sender">👤 職員</div>
+              <div class="bubble-text">「前回の続きから、今日どこへ何を確認すればいいか整理して」</div>
+            </div>
+            <div class="chat-bubble ai">
+              <div class="bubble-sender">🤖 専属AI</div>
+              <div class="bubble-text">
+                「前回の記録から2点あります：<br>
+                1. <strong>建設課</strong>へ：作業場所の条件（広さ・搬入路）<br>
+                2. <strong>農林水産課</strong>へ：堆肥等の受け入れ利用条件<br>
+                自課のデスクだけでは決められないため、中庭に置く相談票の下書きを作成しますか？」
+              </div>
+            </div>
+          </div>
+        </div>
+        
+    </div>
+
+    <footer class="slide-footer">
+      <div class="footer-core">
+        <div class="footer-main">全体図の中の「環境課のデスク」を見ています。</div>
+        <div class="footer-sub">相手にいきなり相談を投げつけるのではなく、まず自分の仕事場で論点をクリアにします。</div>
+      </div>
+    </footer>
+  </section>
+
+
+  <section class="slide-item " id="slide-5">
+    <header class="slide-header">
+      <div class="meta-tag">DEEP DIVE / STEP 2: BOUNDARY</div>
+      <div class="slide-number">05 / 12</div>
+    </header>
+
+    <div class="headline-wrap">
+      <h2 class="slide-title">自分の課だけでは、決められないこと</h2>
+      <p class="slide-lead"><strong>作業場所と利用条件は、関係する専門の課と確かめる必要があります。</strong><br>自課の領分と、他課への相談事項を切り分けることで中庭の必要性が生まれます。</p>
+    </div>
+
+    <div class="slide-body">
+      
+        <div class="split-stage">
+          <div class="clarity-card">
+            <div class="clarity-header">
+              <span class="dot blue"></span>
+              <h4>環境課の中で整理できること</h4>
+            </div>
+            <ul class="clarity-list">
+              <li>どんな草木がどれくらいの量出るのか</li>
+              <li>回収時に混入してはいけない異物の基準</li>
+              <li>環境課として用意できる収集体制</li>
+            </ul>
+            <div class="clarity-tag blue-tag">自課のデスクで確定できること</div>
+          </div>
+
+          <div class="clarity-card">
+            <div class="clarity-header">
+              <span class="dot green"></span>
+              <h4>他の課に相談したいこと</h4>
+            </div>
+            <ul class="clarity-list">
+              <li><strong>建設課へ：</strong>保管・一時作業ができる場所の条件は？</li>
+              <li><strong>農林水産課へ：</strong>堆肥や資源として農家で利用できる基準は？</li>
+            </ul>
+            <div class="clarity-tag green-tag">中庭で相手に確かめたい問い</div>
+          </div>
+        </div>
+        <div class="mid-action-banner">
+          <span>➔ ここで、3課の中庭へ「相談票」を置きに行きます</span>
+        </div>
+        
+    </div>
+
+    <footer class="slide-footer">
+      <div class="footer-core">
+        <div class="footer-main">環境課のデスクから「3課の中庭」へ向かいます。</div>
+        <div class="footer-sub">自分の領分を整理したからこそ、相手に聞くべきポイントが明確になります。</div>
+      </div>
+    </footer>
+  </section>
+
+
+  <section class="slide-item " id="slide-6">
+    <header class="slide-header">
+      <div class="meta-tag">DEEP DIVE / STEP 3: COURTYARD SHEET</div>
+      <div class="slide-number">06 / 12</div>
+    </header>
+
+    <div class="headline-wrap">
+      <h2 class="slide-title">中庭を開くと、同じ相談票がある</h2>
+      <p class="slide-lead"><strong>各課が読める場所に、目的と次の確認事項を残します。</strong><br>メールやチャットで流れてしまわないよう、1枚の共通帳票としてテーブルに置きます。</p>
+    </div>
+
+    <div class="slide-body">
+      
+        <div class="sheet-container">
+          <div class="sheet-head">
+            <div class="sheet-badge">📋 3課の中庭 ｜ 共通相談票</div>
+            <div class="sheet-id">ID: 2026-TOBA-01</div>
+          </div>
+          <table class="modern-table">
+            <tr>
+              <th style="width: 28%;">相談の件名</th>
+              <td><strong>清掃で出た草木を活用したい</strong></td>
+            </tr>
+            <tr>
+              <th>発信元と宛先</th>
+              <td>環境課 ➔ 建設課・農林水産課</td>
+            </tr>
+            <tr>
+              <th>確かめたいこと</th>
+              <td>① 作業場所・一時保管場所の条件（建設課）<br>② 資源としての利用条件（農林水産課）</td>
+            </tr>
+            <tr>
+              <th>現在地</th>
+              <td><span class="status-pill warn">相談中</span> 実施するかは、まだ決めていない</td>
+            </tr>
+            <tr>
+              <th>次の動き</th>
+              <td>各課が自課のデスクへ持ち帰り、確認して返答する</td>
+            </tr>
+          </table>
+        </div>
+        
+    </div>
+
+    <footer class="slide-footer">
+      <div class="footer-core">
+        <div class="footer-main">全体図の中の「3課の中庭」を開いています。</div>
+        <div class="footer-sub">中庭に置くのは共同の仕事に必要な情報だけ。置いただけで決定ではなく、ここから各課の検討が始まります。</div>
+      </div>
+    </footer>
+  </section>
+
+
+  <section class="slide-item " id="slide-7">
+    <header class="slide-header">
+      <div class="meta-tag">DEEP DIVE / STEP 4: DELIBERATION</div>
+      <div class="slide-number">07 / 12</div>
+    </header>
+
+    <div class="headline-wrap">
+      <h2 class="slide-title">建設課は、持ち帰って考えてから返す</h2>
+      <p class="slide-lead"><strong>中庭の相談を読んだだけで、引き受けたことにはなりません。</strong><br>自課のデスクに持ち帰り、自分たちの基準で対応できる範囲を整理します。</p>
+    </div>
+
+    <div class="slide-body">
+      
+        <div class="steps-flow">
+          <div class="step-col">
+            <div class="step-num">01</div>
+            <div class="step-tit">中庭の相談を読む</div>
+            <div class="step-desc">「作業場所の条件を確認してほしい」という相談票を確認。</div>
+            <div class="step-loc">📍 3課の中庭</div>
+          </div>
+
+          <div class="step-arrow">➔</div>
+
+          <div class="step-col highlight">
+            <div class="step-num">02</div>
+            <div class="step-tit">自課の中で確認する</div>
+            <div class="step-desc">職員とAIが担当資料・安全基準を精査。場所の条件をまとめる。</div>
+            <div class="step-loc">🏢 建設課のデスク</div>
+          </div>
+
+          <div class="step-arrow">➔</div>
+
+          <div class="step-col">
+            <div class="step-num">03</div>
+            <div class="step-tit">中庭の相談票へ返す</div>
+            <div class="step-desc">「場所の条件を記しました。<br><strong>運搬の担当は未定です</strong>」</div>
+            <div class="step-loc">📍 3課の中庭</div>
+          </div>
+        </div>
+        
+    </div>
+
+    <footer class="slide-footer">
+      <div class="footer-core">
+        <div class="footer-main">職員とAIが、この往復を担います。文書には返答と判断理由が残ります。</div>
+        <div class="footer-sub">中庭で即答を迫らず、自課のデスクに持ち帰ることで、無理のない確実な仕事になります。</div>
+      </div>
+    </footer>
+  </section>
+
+
+  <section class="slide-item " id="slide-8">
+    <header class="slide-header">
+      <div class="meta-tag">DEEP DIVE / STEP 5: ROLE SHARING</div>
+      <div class="slide-number">08 / 12</div>
+    </header>
+
+    <div class="headline-wrap">
+      <h2 class="slide-title">相談の往復から、役割分担が見えてくる</h2>
+      <p class="slide-lead"><strong>各課の返答をもとに、担当と共有する成果を整理します。</strong><br>決まったことだけでなく、まだ決まっていない課題もそのまま記録に残します。</p>
+    </div>
+
+    <div class="slide-body">
+      
+        <div class="roles-stage">
+          <table class="modern-table roles">
+            <thead>
+              <tr>
+                <th style="width: 25%;">担当</th>
+                <th style="width: 45%;">受け持つこと</th>
+                <th style="width: 30%;">共有する成果物</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>環境課</strong></td>
+                <td>分別・受け入れ条件の整理</td>
+                <td><span class="doc-tag">📄 受け入れ条件表</span></td>
+              </tr>
+              <tr>
+                <td><strong>建設課</strong></td>
+                <td>作業場所の選定・安全注意事項の整理</td>
+                <td><span class="doc-tag">📄 場所と注意事項</span></td>
+              </tr>
+              <tr>
+                <td><strong>農林水産課</strong></td>
+                <td>資源（堆肥等）としての利用条件整理</td>
+                <td><span class="doc-tag">📄 利用条件表</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="unresolved-callout">
+            <div class="callout-icon">⚠️</div>
+            <div>
+              <div class="callout-title">残る問い：運搬は誰が担うか。</div>
+              <div class="callout-desc">運搬の担当が正式に決まるまで、事業の実施は保留とする。曖昧なまま見切り発車しない。</div>
+            </div>
+          </div>
+        </div>
+        
+    </div>
+
+    <footer class="slide-footer">
+      <div class="footer-core">
+        <div class="footer-main">3課の中庭で整えた成果を、それぞれのデスクへ持ち帰ります。</div>
+        <div class="footer-sub">できた文書と判断理由を持ち帰り、自課の本来の業務に生かします。</div>
+      </div>
+    </footer>
+  </section>
+
+
+  <section class="slide-item " id="slide-9">
+    <header class="slide-header">
+      <div class="meta-tag">CASE STUDY / RETURN TO OVERVIEW</div>
+      <div class="slide-number">09 / 12</div>
+    </header>
+
+    <div class="headline-wrap">
+      <h2 class="slide-title">全体に戻ると、仕事のつながりが見える</h2>
+      <p class="slide-lead"><strong>中庭で整理した分担と成果が、それぞれの課の仕事に戻ります。</strong><br>中庭は永住する場所ではなく、成果を持ち帰って自立するための場所です。</p>
+    </div>
+
+    <div class="slide-body">
+      
+        <div class="map-stage">
+          <!-- Top Courtyard -->
+          <div class="map-oval top">
+            <div class="oval-title">🌿 総務と各課の中庭</div>
+            <div class="oval-sub">提出様式・質問と回答・改訂理由</div>
+          </div>
+          
+          <div class="map-connect top-con"></div>
+
+          <!-- Desk Row with Results -->
+          <div class="map-desks-row">
+            <div class="mini-desk-card">
+              <div class="mini-desk-head">総務課</div>
+              <div class="mini-desk-tag">デスク</div>
+            </div>
+            <div class="mini-desk-card success">
+              <div class="mini-desk-head">環境課</div>
+              <div class="mini-desk-tag active">受入条件表を活用</div>
+            </div>
+            <div class="mini-desk-card success">
+              <div class="mini-desk-head">建設課</div>
+              <div class="mini-desk-tag active">場所と注意を記録</div>
+            </div>
+            <div class="mini-desk-card success">
+              <div class="mini-desk-head">農林水産課</div>
+              <div class="mini-desk-tag active">利用条件を確認</div>
+            </div>
+          </div>
+
+          <div class="map-connect bottom-con"></div>
+
+          <!-- Bottom Courtyard Settled -->
+          <div class="map-oval bottom settled">
+            <div class="oval-title">🌿 3課の中庭（成果還流済み）</div>
+            <div class="oval-sub">相談票・役割分担表・残る問いが整い、一区切り</div>
+          </div>
+        </div>
+        
+    </div>
+
+    <footer class="slide-footer">
+      <div class="footer-core">
+        <div class="footer-main">中庭で整理した成果が、それぞれの課の仕事に戻りました。</div>
+        <div class="footer-sub">成果を持ち帰れば、中庭の役目は終わります。用事が済めば静かに閉じることができます。</div>
+      </div>
+    </footer>
+  </section>
+
+
+  <section class="slide-item " id="slide-10">
+    <header class="slide-header">
+      <div class="meta-tag">CASE STUDY / GENERAL AFFAIRS MESH</div>
+      <div class="slide-number">10 / 12</div>
+    </header>
+
+    <div class="headline-wrap">
+      <h2 class="slide-title">総務と各課の中庭も、同じ仕組み</h2>
+      <p class="slide-lead"><strong>例えば、全庁に関わる会議資料の提出ルールを共有する場合。</strong><br>管理者が一方的に押し付けるのではなく、中庭で質問と回答を蓄積します。</p>
+    </div>
+
+    <div class="slide-body">
+      
+        <div class="split-stage">
+          <div class="clarity-card">
+            <div class="clarity-header">
+              <span class="dot green"></span>
+              <h4>総務課が中庭に置くもの</h4>
+            </div>
+            <ul class="clarity-list">
+              <li><strong>統一様式と記入例：</strong>誰もが迷わない手本</li>
+              <li><strong>提出先と締切日時：</strong>スケジュールと提出先</li>
+              <li><strong>改訂日と適用開始日：</strong>ルールの有効期間</li>
+            </ul>
+            <div class="clarity-tag green-tag">共有ルール・公式ドキュメント</div>
+          </div>
+
+          <div class="clarity-card">
+            <div class="clarity-header">
+              <span class="dot blue"></span>
+              <h4>各課から中庭へ返すもの</h4>
+            </div>
+            <div class="chat-bubble user" style="margin-bottom: 12px;">
+              <div class="bubble-sender">💬 各課からの問い</div>
+              <div class="bubble-text">「この項目は、うちの課の特殊な事業ではどう記入すればよいですか？」</div>
+            </div>
+            <div class="chat-bubble ai">
+              <div class="bubble-sender">💡 総務の回答</div>
+              <div class="bubble-text">「その場合は別紙参照として構いません」➔ 全課が見えるQ&Aに残る</div>
+            </div>
+            <div class="clarity-tag blue-tag">質問と回答の集合知</div>
+          </div>
+        </div>
+        
+    </div>
+
+    <footer class="slide-footer">
+      <div class="footer-core">
+        <div class="footer-main">全体図の中の「総務と各課の中庭」を見ています。</div>
+        <div class="footer-sub">採用済みのルールと、まだ検討中の提案を分けて置くことで、現場の混乱を防ぎます。</div>
+      </div>
+    </footer>
+  </section>
+
+
+  <section class="slide-item " id="slide-11">
+    <header class="slide-header">
+      <div class="meta-tag">CORE PHILOSOPHY / SYNTHESIS</div>
+      <div class="slide-number">11 / 12</div>
+    </header>
+
+    <div class="headline-wrap">
+      <h2 class="slide-title">自分たちの仕事場と、一緒に働く中庭</h2>
+      <p class="slide-lead"><strong>デスクで仕事を育て、メッシュで協働の約束と成果を育てます。</strong><br>お互いの不可侵な領分を守るからこそ、人は安心して力を合わせることができます。</p>
+    </div>
+
+    <div class="slide-body">
+      
+        <div class="synthesis-stage">
+          <div class="syn-card desk-syn">
+            <div class="syn-icon">🏢</div>
+            <h3 class="syn-title">どこでもデスク</h3>
+            <div class="syn-subtitle">自律と集中の仕事場</div>
+            <ul class="syn-points">
+              <li>自分とAIのペアで思考を深める</li>
+              <li>誰の目も気にせず下書き・試行錯誤できる</li>
+              <li>自分たちのペースで判断し、自立する</li>
+            </ul>
+          </div>
+
+          <div class="syn-center-symbol">
+            <div class="sym-circle">✕</div>
+            <div class="sym-text">境界と循環</div>
+          </div>
+
+          <div class="syn-card mesh-syn">
+            <div class="syn-icon">🌿</div>
+            <h3 class="syn-title">どこでもメッシュ</h3>
+            <div class="syn-subtitle">約束と成果の中庭</div>
+            <ul class="syn-points">
+              <li>必要な情報だけをテーブルに持ち寄る</li>
+              <li>相手の部屋には踏み込まない（境界の維持）</li>
+              <li>成果を持ち帰り、用が済めば閉じられる</li>
+            </ul>
+          </div>
+        </div>
+        
+    </div>
+
+    <footer class="slide-footer">
+      <div class="footer-core">
+        <div class="footer-main">中庭の目的は各デスクの仕事を豊かにすること。共有フォルダ自体が人を監視するものではありません。</div>
+        <div class="footer-sub">巨大なクラウドプラットフォームに支配されない、PCローカル起点の人間的で自由な協働です。</div>
+      </div>
+    </footer>
+  </section>
+
+
+  <section class="slide-item " id="slide-12">
+    <header class="slide-header">
+      <div class="meta-tag">REFERENCE & SCOPE</div>
+      <div class="slide-number">12 / 12</div>
+    </header>
+
+    <div class="headline-wrap">
+      <h2 class="slide-title">この説明の前提と参照先</h2>
+      <p class="slide-lead"><strong>鳥羽市の実在課名を借りた、AI時代の新しい協働モデルの解説です。</strong><br>実際の導入事例や事務分掌を示すものではありません。出典と参照先を以下に記します。</p>
+    </div>
+
+    <div class="slide-body">
+      
+        <div class="ref-grid">
+          <div class="ref-item">
+            <div class="ref-head">部署名の出典</div>
+            <div class="ref-tit">鳥羽市「市役所の行政機構と主な仕事」</div>
+            <div class="ref-sub">2026年10月1日更新。課名の参照に使用（2026年10月17日確認）。</div>
+            <a class="ref-link" href="https://www.city.toba.mie.jp/soshiki/gyosei/gyomu/gyouseikikou/2101.html" target="_blank" rel="noopener">city.toba.mie.jp/.../gyouseikikou/2101.html ↗</a>
+          </div>
+
+          <div class="ref-item">
+            <div class="ref-head">仕様と実装</div>
+            <div class="ref-tit">どこでもデスク ／ どこでもメッシュ</div>
+            <div class="ref-sub">オープンソースの協働ディレクトリ仕様・テンプレート</div>
+            <a class="ref-link" href="https://github.com/kentaroid-bot/Dokodemo-Desk" target="_blank" rel="noopener">github.com/kentaroid-bot/Dokodemo-Desk ↗</a><br>
+            <a class="ref-link" href="https://github.com/kentaroid-bot/dokodemo-mesh" target="_blank" rel="noopener">github.com/kentaroid-bot/dokodemo-mesh ↗</a>
+          </div>
+
+          <div class="ref-item wide">
+            <div class="ref-head">思想の背景</div>
+            <div class="ref-tit">『思考と境界の探求』（boundaries-of-thought）</div>
+            <div class="ref-sub">AIと人間、組織と個人の領分と境界についての思索の書。</div>
+            <a class="ref-link" href="https://github.com/kentaroid-bot/boundaries-of-thought" target="_blank" rel="noopener">github.com/kentaroid-bot/boundaries-of-thought ↗</a>
+          </div>
+        </div>
+        
+    </div>
+
+    <footer class="slide-footer">
+      <div class="footer-core">
+        <div class="footer-main">Monku_AI ｜ Agy Signature Edition</div>
+        <div class="footer-sub">2026年10月17日改訂。企画・設計・制作：Kentaroid × Agy</div>
+      </div>
+    </footer>
+  </section>
+
+</div>
+
+<!-- Bottom Navigation Deck -->
+<nav class="deck-controls" aria-label="スライド操作">
+  <div class="ctrl-group">
+    <button class="btn" id="prevBtn" type="button">← 前へ</button>
+    <button class="btn" id="nextBtn" type="button">次へ →</button>
+    <div class="progress-wrap" role="progressbar" aria-label="スライドの進み具合" aria-valuemin="1" aria-valuemax="12" aria-valuenow="1"><div class="progress-bar" id="progressBar"></div></div>
+    <span class="slide-counter" id="counterText" aria-live="polite">01 / 12</span>
+  </div>
+
+  <div class="ctrl-group">
+    <button class="btn" id="mapJumpBtn" type="button">🗺 全体図（#03）へ</button>
+    <button class="btn" id="themeToggleBtn" type="button"><span id="themeIcon">🌙</span> テーマ</button>
+    <button class="btn" id="fullScreenBtn" type="button">⛶ 全画面</button>
+  </div>
+</nav>
+
+<script>
+  const slides = document.querySelectorAll('.slide-item');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const counterText = document.getElementById('counterText');
+  const progressBar = document.getElementById('progressBar');
+  const mapJumpBtn = document.getElementById('mapJumpBtn');
+  const themeToggleBtn = document.getElementById('themeToggleBtn');
+  const themeIcon = document.getElementById('themeIcon');
+  const fullScreenBtn = document.getElementById('fullScreenBtn');
+  const slideCanvas = document.getElementById('slideCanvas');
+
+  let currentIndex = 0;
+  const totalSlides = slides.length;
+
+  function updateSlide(index) {
+    currentIndex = Math.max(0, Math.min(index, totalSlides - 1));
+    slides.forEach((s, idx) => {
+      s.classList.toggle('active', idx === currentIndex);
+    });
+
+    prevBtn.disabled = currentIndex === 0;
+    nextBtn.disabled = currentIndex === totalSlides - 1;
+
+    const currentNum = String(currentIndex + 1).padStart(2, '0');
+    counterText.textContent = `${currentNum} / ${totalSlides}`;
+    progressBar.style.width = `${((currentIndex + 1) / totalSlides) * 100}%`;
+
+    history.replaceState(null, '', '#' + (currentIndex + 1));
+    progressBar.parentElement.setAttribute('aria-valuenow', String(currentIndex + 1));
+  }
+
+  prevBtn.addEventListener('click', () => updateSlide(currentIndex - 1));
+  nextBtn.addEventListener('click', () => updateSlide(currentIndex + 1));
+  mapJumpBtn.addEventListener('click', () => updateSlide(2)); // Slide 3 is index 2
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.altKey || e.ctrlKey || e.metaKey || e.target.closest('button, a, input, textarea, select, [contenteditable]')) return;
+    if (['ArrowRight', 'Space', 'PageDown'].includes(e.code) || e.key === 'ArrowRight') {
+      e.preventDefault();
+      updateSlide(currentIndex + 1);
+    } else if (['ArrowLeft', 'PageUp'].includes(e.code) || e.key === 'ArrowLeft') {
+      e.preventDefault();
+      updateSlide(currentIndex - 1);
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      updateSlide(0);
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      updateSlide(totalSlides - 1);
+    }
+  });
+
+  // Hash Navigation
+  window.addEventListener('hashchange', () => {
+    const hashNum = parseInt(location.hash.replace('#', ''), 10);
+    if (!isNaN(hashNum) && hashNum >= 1 && hashNum <= totalSlides) {
+      updateSlide(hashNum - 1);
+    }
+  });
+
+  // Initial Hash
+  const initialHash = parseInt(location.hash.replace('#', ''), 10);
+  if (!isNaN(initialHash) && initialHash >= 1 && initialHash <= totalSlides) {
+    updateSlide(initialHash - 1);
+  } else {
+    updateSlide(0);
+  }
+
+  // Theme Toggle
+  let isDark = false;
+  themeToggleBtn.addEventListener('click', () => {
+    isDark = !isDark;
+    if (isDark) {
+      slideCanvas.setAttribute('data-theme', 'dark');
+      themeIcon.textContent = '☀️';
+    } else {
+      slideCanvas.removeAttribute('data-theme');
+      themeIcon.textContent = '🌙';
+    }
+  });
+
+  document.addEventListener('fullscreenchange', () => {
+    fullScreenBtn.textContent = document.fullscreenElement ? '⛶ 全画面を終了' : '⛶ 全画面';
+  });
+
+  // Fullscreen
+  fullScreenBtn.addEventListener('click', async () => {
+    try {
+      if (!document.fullscreenElement) {
+        await document.documentElement.requestFullscreen();
+      } else {
+        await document.exitFullscreen();
+      }
+    } catch (err) {
+      fullScreenBtn.textContent = 'ブラウザの全画面をご利用ください';
+    }
+  });
+</script>
+
+</body>
+</html>
