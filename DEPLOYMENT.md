@@ -1,6 +1,6 @@
 # Cloudflare Pagesの配信設定
 
-単体HTMLの静的配信としてCloudflare Pagesを使用します。独立プロジェクトで、既存サイトや独自ドメインのDNSは変更していません。
+単体HTMLの静的配信としてCloudflare Pagesを使用します。独立プロジェクトで、`desk-mesh.monku.ai`だけをこのプロジェクトへ接続しています。
 
 ## 設定値
 
@@ -19,9 +19,9 @@
 
 ## 公開URL
 
-[desk-and-mesh-presentation.pages.dev](https://desk-and-mesh-presentation.pages.dev/)
+[desk-mesh.monku.ai](https://desk-mesh.monku.ai/)
 
-`og:url`とcanonical URLは上記URLにそろえます。独自ドメインは未設定です。
+`og:url`とcanonical URLは上記URLにそろえます。Pages標準URL `https://desk-and-mesh-presentation.pages.dev/` も利用できます。
 
 ## 更新時の順序
 

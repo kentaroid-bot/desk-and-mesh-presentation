@@ -6,7 +6,7 @@ Agy Full Editionのデザイン・本文を収録しています。鳥羽市の�
 
 ## 見る・操作する
 
-**[スライドを開く](https://desk-and-mesh-presentation.pages.dev/)**
+**[スライドを開く](https://desk-mesh.monku.ai/)**
 
 手元で開く場合：
 
