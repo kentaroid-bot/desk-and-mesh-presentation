@@ -6,6 +6,10 @@ Agy Full Editionのデザイン・本文を収録しています。鳥羽市の�
 
 ## 見る・操作する
 
+**[スライドを開く](https://desk-and-mesh-presentation.pages.dev/)**
+
+手元で開く場合：
+
 ```sh
 python3 -m http.server 8000 --bind 127.0.0.1
 ```
@@ -32,7 +36,7 @@ python3 -m http.server 8000 --bind 127.0.0.1 --directory dist
 
 `dist/` には公開用のHTML、ファビコン、404ページ、ヘッダー設定だけをコピーします。README・検証用ファイル・Git情報は配信対象に含めません。Cloudflare Pagesの設定は [DEPLOYMENT.md](DEPLOYMENT.md) を参照してください。
 
-公開URLは未確定です。ローカルの準備段階では、リモートリポジトリ作成・公開配備を行っていません。
+Cloudflare Pagesで配信します。GitHubの`main`へのpushでビルドと本番配備が起動します。
 
 ## 検証
 

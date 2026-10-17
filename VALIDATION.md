@@ -33,7 +33,7 @@
 
 SHA-256：`0f2b8c33ecf8d9ca24dd3a85a4c203143200d113f4db6d474ccd1135e5c3fa63`
 
-公開用`index.html`のSHA-256：`e23b3cb7a8b86cf388b23503e7a00cf55902221bfc83a97083dd157afe7fa3d5`
+Level 2提出時の`index.html`のSHA-256：`e23b3cb7a8b86cf388b23503e7a00cf55902221bfc83a97083dd157afe7fa3d5`。公開時にはcanonicalとog:urlを追加しています。
 
 ## 再実行
 
@@ -48,8 +48,8 @@ node tests/browser.mjs
 
 既存のPlaywrightを利用する場合は`PLAYWRIGHT_MODULE`でそのモジュールの場所を指定できます。結果と画像はGit対象外の`.qa/`へ保存します。
 
-## 未確認の範囲
+## ローカル検証の範囲外
 
-Cloudflareでの実配備・DNS・証明書・本番ヘッダー適用は未実施です。ローカルのPythonサーバーは`_headers`を適用しません。Safari / Firefox / 実機スマートフォンも未確認です。Google Fontsは外部配信を利用し、接続できない場合は端末フォントへフォールバックします。
+この記録はローカル検証時点のものです。Cloudflareでの実配備・DNS・証明書・本番ヘッダー適用はこの検証に含みません。ローカルのPythonサーバーは`_headers`を適用しません。Safari / Firefox / 実機スマートフォンも対象外です。Google Fontsは外部配信を利用し、接続できない場合は端末フォントへフォールバックします。
 
 この記録はCodexの実装検証です。独立したレビュー承認と公開実施は別工程です。
